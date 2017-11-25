@@ -7,10 +7,14 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   inputHint: string ="What needs to be done?";
-  todos: Array<string>= new Array();
+  todos = new Array();
   todo: string = "";
   pushInputValue(value){
-    this.todos.push(value);
+    let newTodo = {
+      text:value,
+      done:false
+    };
+    this.todos.push(newTodo);
     console.log(this.todos);
     this.todo = "";
   }
