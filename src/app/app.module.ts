@@ -6,6 +6,7 @@ import { TitleComponentComponent } from './title-component/title-component.compo
 import { FooterComponentComponent } from './footer-component/footer-component.component';
 import { FilterPipe } from './filter.pipe';
 import { HttpClientModule } from '@angular/common/http';
+import { DataService } from './data.service';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,7 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
