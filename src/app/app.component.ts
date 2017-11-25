@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { FilterPipe } from "./filter.pipe";
+import { HttpClient } from "@angular/common/http";
 
 @Component({
   selector: "app-root",
@@ -12,6 +12,9 @@ export class AppComponent {
   todo: string = "";
   filterType = "All";
   isToggleAll = false;
+
+  constructor(http: HttpClient) {}
+
 
   pushInputValue(value) {
     let newTodo = {
@@ -37,6 +40,6 @@ export class AppComponent {
   }
 
   removeTodo(todo) {
-      this.todos = this.todos.filter(item => item !== todo);
-    }
+    this.todos = this.todos.filter(item => item !== todo);
+  }
 }

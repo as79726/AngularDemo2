@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { TitleComponentComponent } from './title-component/title-component.component';
 import { FooterComponentComponent } from './footer-component/footer-component.component';
 import { FilterPipe } from './filter.pipe';
-
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -16,7 +16,8 @@ import { FilterPipe } from './filter.pipe';
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
