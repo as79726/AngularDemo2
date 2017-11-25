@@ -12,4 +12,5 @@ export class TitleComponentComponent implements OnInit {
   ngOnInit() {
   }
 
+  title = 'todos';
 }
