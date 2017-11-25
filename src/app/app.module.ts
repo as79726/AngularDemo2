@@ -4,13 +4,15 @@ import {FormsModule} from '@angular/forms';
 import { AppComponent } from './app.component';
 import { TitleComponentComponent } from './title-component/title-component.component';
 import { FooterComponentComponent } from './footer-component/footer-component.component';
+import { FilterPipe } from './filter.pipe';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     TitleComponentComponent,
-    FooterComponentComponent
+    FooterComponentComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,

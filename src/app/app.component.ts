@@ -9,6 +9,8 @@ export class AppComponent {
   inputHint: string ="What needs to be done?";
   todos = new Array();
   todo: string = "";
+  filterType = "All";
+
   pushInputValue(value){
     let newTodo = {
       text:value,
@@ -21,5 +23,9 @@ export class AppComponent {
 
   clearCompleted($event){
     this.todos = this.todos.filter(item => item.done === false);
+  }
+
+  filterTypeChange($event){
+    this.filterType = $event;
   }
 }
