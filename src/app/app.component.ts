@@ -12,21 +12,30 @@ export class AppComponent {
   todo: string = "";
   filterType = "All";
   isToggleAll = false;
+  apiUrl: string = "http://localhost:3000/todos";
 
-  constructor(http: HttpClient) {}
+  constructor(private http: HttpClient) {}
 
-
+  ngOnInit() {
+    this.http.get<any[]>(this.apiUrl).subscribe(data => {
+      this.todos = data;
+    });
+  }
   pushInputValue(value) {
     let newTodo = {
       text: value,
       done: false
     };
-    this.todos = this.todos.concat(newTodo);
-    this.todo = "";
+    this.http.post(this.apiUrl, newTodo).subscribe(data => {
+      this.todos = this.todos.concat(data);
+      this.todo = "";
+    });
   }
 
   clearCompleted($event) {
-    this.todos = this.todos.filter(item => item.done === false);
+    this.todos.filter(item => item.done).forEach(item => {
+      this.removeTodo(item);
+    });
   }
 
   filterTypeChange($event) {
@@ -36,10 +45,18 @@ export class AppComponent {
   toggleAllChange() {
     this.todos.forEach(item => {
       item.done = this.isToggleAll;
+      this.updateTodo(item);
     });
   }
 
   removeTodo(todo) {
-    this.todos = this.todos.filter(item => item !== todo);
+    this.http.delete(`${this.apiUrl}/${todo.id}`, todo).subscribe(data => {
+      this.todos = this.todos.filter(item => item != todo);
+    });
+  }
+
+  updateTodo(todo) {
+    this.http.put(`${this.apiUrl}/${todo.id}`, todo)
+         .subscribe();
   }
 }
