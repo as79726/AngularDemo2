@@ -21,7 +21,7 @@
       </li>
     </ul>
   </section>
-<app-footer-component [todosCount]="todos.length" ></app-footer-component>
+<app-footer-component [inputTodos]="todos" (clearEvent)="clearCompleted($event)"></app-footer-component>
 </section>
 <footer class="info">
   <p>Double-click to edit a todo</p>

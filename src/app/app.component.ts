@@ -18,4 +18,8 @@ export class AppComponent {
     console.log(this.todos);
     this.todo = "";
   }
+
+  clearCompleted($event){
+    this.todos = this.todos.filter(item => item.done === false);
+  }
 }
