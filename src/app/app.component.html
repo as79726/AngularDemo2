@@ -1,8 +1,7 @@
 <section class="todoapp">
   <header class="header">
     <app-title-component></app-title-component>
-    <input class="new-todo" [placeholder]="inputHint" autofocus #input (keyup.enter)="pushInputValue(input.value)"
-    [(ngModel)]="todo" >
+    <input class="new-todo" [placeholder]="inputHint" autofocus #input (keyup.enter)="pushInputValue(input.value)" [(ngModel)]="todo">
   </header>
   <!-- This section should be hidden by default and shown when there are todos -->
   <section class="main" *ngIf="todos.length != 0">
@@ -11,18 +10,18 @@
     <ul class="todo-list">
       <!-- These are here just to show the structure of the list items -->
       <!-- List items should get the class `editing` when editing and `completed` when marked as completed -->
-      <li *ngFor="let item of todos | filter:filterType; let i = index" [ngClass]="{completed:item.done}">
+      <li *ngFor="let item of todos | filter:filterType; let i = index" [ngClass]="{completed:item.done}" [class.editing]="item.isEditMode">
         <div class="view">
           <input class="toggle" type="checkbox" [(ngModel)]="item.done" (ngModelChange)="updateTodo(item)">
-          <label [style.color]="item.done ? 'green' : 'red'">{{item.text | uppercase}}</label>
+          <label [style.color]="item.done ? 'green' : 'red'" (dblclick)="enterEditMode(item)">{{item.text | uppercase}}</label>
           <button class="destroy" (click)="removeTodo(item)"></button>
         </div>
-        <input class="edit" value="Create a TodoMVC template">
+        <input class="edit" [(ngModel)]="item.editText" (ngModelChange)="updateTodo(item)" (keyup.esc)="leaveEditMode(item)" (keyup.enter)="saveEdit(item)"
+          value="Create a TodoMVC template">
       </li>
     </ul>
   </section>
-<app-footer-component  #footerComponent [inputTodos]="todos" (clearEvent)="clearCompleted($event)"
-(filterTypeEven)="filterTypeChange($event)"></app-footer-component>
+  <app-footer-component #footerComponent [inputTodos]="todos" (clearEvent)="clearCompleted($event)" (filterTypeEven)="filterTypeChange($event)"></app-footer-component>
 </section>
 <footer class="info">
   <p>Double-click to edit a todo</p>

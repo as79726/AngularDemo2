@@ -20,6 +20,7 @@ export class AppComponent {
 
   ngOnInit() {
     this.dataSvc.getTodos().subscribe(data => {
+      console.log("get" + JSON.stringify(data));
       this.todos = data;
     });
   }
@@ -29,6 +30,7 @@ export class AppComponent {
       done: false
     };
    this.dataSvc.addTodo(newTodo).subscribe(data => {
+     console.log("post" + JSON.stringify(data));
       this.todos = this.todos.concat(data);
       this.todo = "";
     });
@@ -59,5 +61,23 @@ export class AppComponent {
 
   updateTodo(todo) {
     this.dataSvc.updateTodo(todo).subscribe();
+  }
+
+  enterEditMode(todo){
+    console.log(todo);
+    todo.editText = todo.text;
+    todo.isEditMode = true;
+    console.log(todo);
+  }
+
+  leaveEditMode(todo){
+    delete todo.editText;
+    delete todo.isEditMode;
+    this.updateTodo(todo);
+  }
+
+  saveEdit(todo){
+    todo.text = todo.editText;
+    this.leaveEditMode(todo);
   }
 }
